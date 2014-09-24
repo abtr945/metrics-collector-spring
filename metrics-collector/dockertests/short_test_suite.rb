@@ -26,12 +26,7 @@ class ShortTestSuite < MiniTest::Unit::TestCase
   end
   
   
-  # Test 3 - Delete not existing experiment
-  def test_delete_not_exist_experiment
-     not_exist_id = '10000'
-     output = `curl -X DELETE http://localhost:8080/metrics/experiments/#{not_exist_id}`
-     assert_match "<html>", output, "TEST 3: delete not existing experiment - FAILED"
-  end
+  
   
   
   # Test 4 - Show not existing metric
@@ -42,12 +37,6 @@ class ShortTestSuite < MiniTest::Unit::TestCase
   end
   
   
-  # Test 5 - Delete not existing metric
-  def test_delete_not_exist_metric
-     not_exist_id = '10000'
-     output = `curl -X DELETE http://localhost:8080/metrics/metrics/#{not_exist_id}`
-     assert_match "<html>", output, "TEST 5: delete not existing metric - FAILED"
-  end
   
 end
   

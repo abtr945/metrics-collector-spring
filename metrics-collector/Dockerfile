@@ -8,7 +8,7 @@ MAINTAINER An Binh Tran
 RUN apt-get update
 
 # Install required system libraries (Java, Tomcat, Ruby)
-RUN apt-get install -y openjdk-7-jdk tomcat7 ruby1.9.3
+RUN apt-get install -y curl openjdk-7-jdk tomcat7 ruby1.9.3
 
 # Mount the current project workspace to /project in the Docker container
 ADD . /project

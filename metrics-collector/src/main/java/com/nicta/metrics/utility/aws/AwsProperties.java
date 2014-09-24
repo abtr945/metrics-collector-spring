@@ -12,11 +12,11 @@ package com.nicta.metrics.utility.aws;
 public class AwsProperties {
 	
 	public static String getCredentialsFilePath() {
-		return System.getProperty("user.home") + "/.cloudwatch_metrics_collector/AWSCredentials.txt";
+		return "/tmp/.cloudwatch_metrics_collector/AWSCredentials.txt";
 	}
 	
 	public static String getRegionFilePath() {
-		return System.getProperty("user.home") + "/.cloudwatch_metrics_collector/AWSRegion.txt";
+		return "/tmp/.cloudwatch_metrics_collector/AWSRegion.txt";
 	}
 
 	public static String getAwsAccessKeyId() {

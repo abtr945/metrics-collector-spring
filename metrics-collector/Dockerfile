@@ -7,21 +7,19 @@ MAINTAINER An Binh Tran
 # Update the repository sources list
 RUN apt-get update
 
-# Install required system libraries (Java, Tomcat, Ruby)
-RUN apt-get install -y curl openjdk-7-jdk tomcat7 ruby1.9.3
+# Install required system libraries (wget, curl, Java, Tomcat, Ruby)
+RUN apt-get install -y wget curl openjdk-7-jdk ruby1.9.3
+RUN wget -O /tmp/tomcat.tar.gz http://mirror.olnevhost.net/pub/apache/tomcat/tomcat-7/v7.0.55/bin/apache-tomcat-7.0.55.tar.gz
+RUN tar -xzf /tmp/tomcat.tar.gz -C /var/lib
+RUN mv /var/lib/apache-tomcat-7.0.55 /var/lib/tomcat7
+RUN rm /tmp/tomcat.tar.gz
 
 # Mount the current project workspace to /project in the Docker container
 ADD . /project
 
-# Stop the Tomcat7 service
-RUN service tomcat7 stop
+# Rename the .WAR artifact
+RUN cp /project/target/metrics*.war /tmp/metrics.war
 
-# Copy the .WAR artifact to tomcat deploy
-RUN cp /project/target/metrics*.war /var/lib/tomcat7/webapps
-
-# Rename the .WAR file
-RUN mv /var/lib/tomcat7/webapps/metrics*.war /var/lib/tomcat7/webapps/metrics.war
-
-# Restart Tomcat7 to deploy the webapp
-RUN service tomcat7 start
+# Deploy the webapp to Tomcat
+RUN mv /tmp/metrics.war /var/lib/tomcat7/webapps/metrics.war
 

@@ -23,3 +23,5 @@ RUN cp /project/target/metrics*.war /tmp/metrics.war
 # Deploy the webapp to Tomcat
 RUN mv /tmp/metrics.war /var/lib/tomcat7/webapps/metrics.war
 
+# Start the Tomcat container (only run when no overrided CMD is supplied during DOCKER RUN)
+CMD /var/lib/tomcat7/bin/startup.sh

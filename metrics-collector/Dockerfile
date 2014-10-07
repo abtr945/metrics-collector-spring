@@ -23,5 +23,8 @@ RUN cp /project/target/metrics*.war /tmp/metrics.war
 # Deploy the webapp to Tomcat
 RUN mv /tmp/metrics.war /var/lib/tomcat7/webapps/metrics.war
 
+# Expose the Tomcat port 8080
+EXPOSE 8080
+
 # Start the Tomcat container (only run when no overrided CMD is supplied during DOCKER RUN)
 CMD /var/lib/tomcat7/bin/startup.sh

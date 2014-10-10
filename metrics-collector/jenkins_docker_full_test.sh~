@@ -11,7 +11,4 @@ docker run --name ${JOB_NAME} ${JOB_NAME} sh -c '/opt/tomcat7/bin/startup.sh && 
 echo '[script] Spawn Docker container and run All tests completed'
 
 # Remove the Docker container after test
-echo '[script] Clean up Docker container started...'
 docker rm ${JOB_NAME}
-echo '[script] Clean up Docker container completed'
-

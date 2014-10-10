@@ -6,7 +6,7 @@ MAINTAINER An Binh Tran
 
 # Install required system libraries (wget, curl, Java, Tomcat, Ruby, supervisor)
 RUN apt-get -q -y update && apt-get install -y wget curl openjdk-7-jre ruby1.9.3 supervisor
-RUN wget http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.56/bin/apache-tomcat-7.0.56.tar.gz && tar xzf apache-tomcat-7.0.56.tar.gz -C /opt && rm -f apache-tomcat-7.0.56.tar.gz && ln -s /opt/apache-tomcat-7.0.56 /opt/tomcat7
+RUN wget http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.56/bin/apache-tomcat-7$ && tar xzf apache-tomcat-7.0.56.tar.gz -C /opt && rm -f apache-tomcat-7.0.56.tar.gz && ln -s /opt/apache-tomcat-7.0.56 /opt/tomcat7
 
 # Mount the current project workspace to /project in the Docker container
 ADD . /project

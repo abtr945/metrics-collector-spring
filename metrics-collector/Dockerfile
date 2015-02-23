@@ -1,9 +1,6 @@
 # Set the base image to Ubuntu
 FROM ubuntu:latest
 
-# File Author / Maintainer
-MAINTAINER An Binh Tran
-
 # Install required libraries and Servlet container (Java, Tomcat)
 RUN apt-get -q -y update && apt-get install -y openjdk-7-jre tomcat7
 

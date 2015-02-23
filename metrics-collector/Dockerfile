@@ -4,23 +4,17 @@ FROM ubuntu:latest
 # File Author / Maintainer
 MAINTAINER An Binh Tran
 
-# Install required system libraries (wget, curl, Java, Tomcat, Ruby, supervisor)
-RUN apt-get -q -y update && apt-get install -y wget curl openjdk-7-jre ruby1.9.3 supervisor
-RUN wget http://archive.apache.org/dist/tomcat/tomcat-7/v7.0.56/bin/apache-tomcat-7.0.56.tar.gz && tar xzf apache-tomcat-7.0.56.tar.gz -C /opt && rm -f apache-tomcat-7.0.56.tar.gz && ln -s /opt/apache-tomcat-7.0.56 /opt/tomcat7
+# Install required libraries and Servlet container (Java, Tomcat)
+RUN apt-get -q -y update && apt-get install -y openjdk-7-jre tomcat7
 
 # Mount the current project workspace to /project in the Docker container
 ADD . /project
 
-# Rename the .WAR artifact and deploy to Tomcat webapps directory
-RUN cp /project/target/metrics*.war /opt/tomcat7/webapps/metrics.war
+# Deploy application artifact to Tomcat webapps directory
+RUN cp /project/target/metrics-collector.war /var/lib/tomcat7/webapps/metrics-collector.war
 
-# Expose the Tomcat port 8080
+# Expose the Tomcat port 8080 of Docker container to host machine
 EXPOSE 8080
 
-# Configure supervisor to start Tomcat container
-RUN mkdir -p /var/log/supervisor
-ADD supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
-# Start the Tomcat container via supervisor (only run when no overrided CMD is supplied during DOCKER RUN)
-CMD supervisord -c /etc/supervisor/conf.d/supervisord.conf
-
+# Start the Tomcat servlet container
+CMD service tomcat7 start && tail -f /var/lib/tomcat7/logs/catalina.out

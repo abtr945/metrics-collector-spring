@@ -2,7 +2,11 @@
 FROM ubuntu:latest
 
 # Install required libraries and Servlet container (Java, Tomcat)
-RUN apt-get -q -y update && apt-get install -y openjdk-7-jre tomcat7
+RUN apt-get -q -y update
+RUN apt-get install -y openjdk-7-jre tomcat7
+
+RUN apt-get -q -y update
+RUN apt-get install -y openjdk-7-jre tomcat7 curl
 
 # Mount the current project workspace to /project in the Docker container
 ADD . /project
